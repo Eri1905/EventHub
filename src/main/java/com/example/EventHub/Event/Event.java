@@ -5,8 +5,6 @@ import com.example.EventHub.Organisation.Organisation;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
-import org.hibernate.annotations.processing.SQL;
-
 import java.util.Date;
 
 @Entity
@@ -24,7 +22,6 @@ public class Event {
     @NotEmpty(message = "Please enter description!")
     private String description;
     @NotEmpty(message = "Please enter the place of the event!")
-
     private String place;
     @NotNull(message = "Please enter the price of the ticket for the event!")
     private int ticketPrice;
@@ -34,8 +31,11 @@ public class Event {
     private Organisation organisation;
 
     @NotEmpty
+    @ManyToOne
+    @JoinColumn(name = "event_type_id")
     private EventType eventType;
     @NotEmpty
+    @Enumerated(EnumType.STRING)
     private EventStatus eventStatus;
 
 
@@ -103,6 +103,13 @@ public class Event {
         this.capacity = capacity;
     }
 
+    public Organisation getOrganisation() {
+        return organisation;
+    }
+
+    public void setOrganisation(Organisation organisation) {
+        this.organisation = organisation;
+    }
 
     public EventType getEventType() {
         return eventType;

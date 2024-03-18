@@ -1,9 +1,9 @@
 package com.example.EventHub.User;
 
-import com.example.EventHub.Role;
+import com.example.EventHub.Role.Role;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
-import jakarta.validation.constraints.Size;
+
 
 @Entity
 @Table(name = "users")
@@ -11,10 +11,9 @@ public class User {
 
     @Id
     @Column(name = "user_id")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     @NotEmpty(message = "Username cannot be empty!")
-    @Size(min = 4, max = 20)
     private String username;
     @NotEmpty(message = "Please enter email!")
     private String email;
@@ -25,7 +24,10 @@ public class User {
     @NotEmpty(message = "Please enter password!")
     private String password;
     @NotEmpty
+    @ManyToOne
+    @JoinColumn(name = "role_id")
     private Role role;
+    @NotEmpty
     private boolean enabled;
 
     public Long getId() {

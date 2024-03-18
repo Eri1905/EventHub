@@ -3,6 +3,7 @@ package com.example.EventHub.EventType;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
 
+
 @Entity
 @Table(name = "event_types")
 public class EventType {

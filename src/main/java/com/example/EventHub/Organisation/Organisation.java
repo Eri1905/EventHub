@@ -1,11 +1,11 @@
 package com.example.EventHub.Organisation;
 
-import com.example.EventHub.Event.Event;
-import jakarta.persistence.*;
-import jakarta.validation.constraints.NotEmpty;
 
-import java.util.ArrayList;
-import java.util.List;
+import jakarta.persistence.*;
+
+import jakarta.validation.constraints.NotEmpty;
+import org.springframework.stereotype.Service;
+
 
 @Entity
 @Table(name = "organisations")
@@ -14,6 +14,7 @@ public class Organisation {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
     @NotEmpty(message = "Please enter the name of the organisation!")
+    @Column(name = "organisation_name")
     private String organisationName;
 
     public Integer getId() {
@@ -31,4 +32,6 @@ public class Organisation {
     public void setOrganisationName(String organisationName) {
         this.organisationName = organisationName;
     }
+
+
 }
