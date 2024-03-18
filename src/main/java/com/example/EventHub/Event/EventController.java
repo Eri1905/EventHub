@@ -38,7 +38,7 @@ public class EventController {
         } else {
             eventRepository.save(event);
             model.addAttribute("event", event);
-            return "event-result";
+            return "home";
         }
     }
     @GetMapping("/all")
