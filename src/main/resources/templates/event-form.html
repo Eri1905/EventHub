@@ -2,9 +2,60 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Event</title>
 </head>
 <body>
+<h1>Add Event</h1>
+<form action="/submit" method="post">
+    <label for="name">Event Name:</label><br>
+    <input type="text" id="name" name="name" required><br>
 
+    <label for="date">Event Date:</label><br>
+    <input type="date" id="date" name="date" required><br>
+
+    <label for="duration">Event Duration (in hours):</label><br>
+    <input type="number" id="duration" name="duration" required><br>
+
+    <label for="description">Event Description:</label><br>
+    <textarea id="description" name="description" required></textarea><br>
+
+    <label for="place">Event Place:</label><br>
+    <input type="text" id="place" name="place" required><br>
+
+    <label for="ticketPrice">Ticket Price:</label><br>
+    <input type="number" id="ticketPrice" name="ticketPrice" required><br>
+
+    <label for="capacity">Event Capacity:</label><br>
+    <input type="number" id="capacity" name="capacity" required><br>
+
+    <label for="organisation">Organisation:</label><br>
+    <select id="organisation" name="organisation" required>
+        <option value="">Select Organisation</option>
+        <!-- Populate organisations dynamically -->
+        <!-- Example: <option value="organisation1">Organisation 1</option> -->
+        <!-- You can use Thymeleaf to iterate over organisations -->
+        <!-- Example: <option th:each="org : ${organisations}" th:value="${org.id}" th:text="${org.name}"></option> -->
+    </select><br>
+
+    <label for="eventType">Event Type:</label><br>
+    <select id="eventType" name="eventType" required>
+        <option value="">Select Event Type</option>
+        <!-- Populate event types dynamically -->
+        <!-- Example: <option value="eventType1">Event Type 1</option> -->
+        <!-- You can use Thymeleaf to iterate over event types -->
+        <!-- Example: <option th:each="type : ${eventTypes}" th:value="${type.id}" th:text="${type.name}"></option> -->
+    </select><br>
+
+    <label for="eventStatus">Event Status:</label><br>
+    <select id="eventStatus" name="eventStatus" required>
+        <option value="">Select Event Status</option>
+        <option value="PLANNED">Planned</option>
+        <option value="ONGOING">Ongoing</option>
+        <option value="FINISHED">Finished</option>
+    </select><br>
+
+    <input type="submit" value="Submit">
+</form>
 </body>
 </html>

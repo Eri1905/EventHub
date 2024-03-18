@@ -39,10 +39,10 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
       <div class="navbar-nav mr-auto">
-        <a sec:authorize="hasAuthority('Admin')" class="nav-link" href="/event/add">Add Event</a>
-        <a sec:authorize="hasAuthority('Admin')" class="nav-link" href="/organisation/add">Add Actor</a>
-        <a class="nav-link" href="/actor/all">All Actors</a>
-        <a class="nav-link" href="/film/all">All Films</a>
+        <a sec:authorize="hasAuthority('Admin', 'Manager')" class="nav-link" href="/event/add">Add Event</a>
+        <a sec:authorize="hasAuthority('Admin')" class="nav-link" href="/organisation/add">Add Organisation</a>
+        <a class="nav-link" href="/event/all">All Events</a>
+        <a class="nav-link" href="/organisation/all">All Organisations</a>
       </div>
       <div class="ml-auto">
         <a class="nav-link active" sec:authorize="isAuthenticated()" href="/profile">Profile</a>
