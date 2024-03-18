@@ -18,7 +18,7 @@ public class EventTypeController {
     EventTypeRepository eventTypeRepository;
     @GetMapping("/add")
     public String addEvent(Model model){
-        model.addAttribute("event", new Event());
+        model.addAttribute("eventType", new EventType());
         model.addAttribute("eventTypes", eventTypeRepository.findAll());
         return "event-type-form";
     }

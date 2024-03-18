@@ -1,11 +1,14 @@
 package com.example.EventHub.Event;
 
+import com.example.EventHub.EventStatus.EventStatus;
 import com.example.EventHub.EventType.EventType;
 import com.example.EventHub.Organisation.Organisation;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
+
 import java.util.Date;
+
 
 @Entity
 @Table(name = "events")
@@ -27,16 +30,19 @@ public class Event {
     private int ticketPrice;
     @NotNull(message = "Please enter the capacity of the event!")
     private int capacity;
+    @NotEmpty(message = "Please choose organisation!")
     @ManyToOne
     @JoinColumn(name = "organisation_id")
     private Organisation organisation;
 
-    @NotEmpty
+    @NotEmpty(message = "Please choose event type!")
     @ManyToOne
     @JoinColumn(name = "event_type_id")
     private EventType eventType;
-    @NotEmpty
-    @Enumerated(EnumType.STRING)
+
+    @NotEmpty(message = "Please choose event status")
+    @ManyToOne
+    @JoinColumn(name = "event_status")
     private EventStatus eventStatus;
 
 

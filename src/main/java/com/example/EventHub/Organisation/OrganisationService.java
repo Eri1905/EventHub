@@ -16,7 +16,7 @@ public class OrganisationService {
         Optional<Organisation> optionalOrganisation = organisationRepository.findById(id);
         if (optionalOrganisation.isPresent()) {
             Organisation organisation = organisationRepository.findById(id).get();
-            model.addAttribute("organisation", organisation);
+            model.addAttribute("updateOrganisation", organisation);
             return "organisation-update-form";
         } else {
             return "id could not be found";

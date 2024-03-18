@@ -20,7 +20,7 @@ public class EventService {
         if (optionalEvent.isPresent()) {
             Event event = eventRepository.findById(id).get();
             model.addAttribute("allEventTypes", eventTypeRepository.findAll());
-            model.addAttribute("event", event);
+            model.addAttribute("updateEvent", event);
             return "event-update-form";
         } else {
             return "id could not be find";
