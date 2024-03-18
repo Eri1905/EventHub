@@ -3,6 +3,7 @@ package com.example.EventHub.User;
 import com.example.EventHub.Role.Role;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
+import org.hibernate.validator.constraints.UniqueElements;
 
 
 @Entity
@@ -14,7 +15,9 @@ public class User {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     @NotEmpty(message = "Username cannot be empty!")
+    @UniqueElements(message = "Username already exist! ")
     private String username;
+    @UniqueElements(message = "Email already exist!")
     @NotEmpty(message = "Please enter email!")
     private String email;
     @NotEmpty(message = "Please enter name!")

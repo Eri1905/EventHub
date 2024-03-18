@@ -6,6 +6,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 @Configuration
 @EnableWebSecurity
@@ -14,19 +15,24 @@ public class WebSecurityConfig {
     public UserDetailsService userDetailsService() {
         return new UserDetailsServiceImpl();
     }
+    @Bean
+    public BCryptPasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
+    }
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
             http
                     .authorizeHttpRequests((requests) -> requests
-                            .requestMatchers("/registration").permitAll()
+                            .requestMatchers("/registration","/login").permitAll()
                             .requestMatchers("/film/all").permitAll()
-                            .requestMatchers("/film/add").hasAnyAuthority("ADMIN", "USER")
+                            .requestMatchers("/film/add","/home").hasAnyAuthority("Admin", "USER")
                             .requestMatchers("/actor/**").hasAuthority("ADMIN")
                             .anyRequest().authenticated()
                     )
                 .formLogin((form) -> form
                         .loginPage("/login")
+                        .successForwardUrl("/home")
                         .permitAll()
                 )
                 .logout((logout) -> logout.permitAll());

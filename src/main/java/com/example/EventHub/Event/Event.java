@@ -27,6 +27,7 @@ public class Event {
     private int ticketPrice;
     @NotNull(message = "Please enter the capacity of the event!")
     private int capacity;
+    @ManyToOne
     @JoinColumn(name = "organisation_id")
     private Organisation organisation;
 
