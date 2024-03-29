@@ -1,10 +1,46 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Event Type</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .form-group {
+            margin-bottom: 20px;
+        }
+        .card {
+            margin-top: 20px;
+        }
+        .error {
+            color: red;
+            font-size: 12px;
+        }
+    </style>
 </head>
 <body>
-
+<header th:insert="header.html"></header>
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="text-center">Add Event Type</h3>
+                </div>
+                <div class="card-body">
+                    <form action="#" th:action="@{/event-type/submit}" th:object="${eventType}" method="post">
+                        <div class="form-group">
+                            <label for="typeName">Type Name:</label>
+                            <input type="text" id="typeName" class="form-control" th:field="*{typeName}" required>
+                            <span class="error" th:if="${#fields.hasErrors('typeName')}" th:errors="*{typeName}"></span>
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-block">Add Event Type</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 </body>
 </html>
+

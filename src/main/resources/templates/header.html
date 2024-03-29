@@ -39,7 +39,7 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
       <div class="navbar-nav mr-auto">
-        <a sec:authorize="hasAuthority('Admin', 'Manager')" class="nav-link" href="/event/add">Add Event</a>
+        <a sec:authorize="hasAuthority('Admin') or hasAuthority('Manager')" class="nav-link" href="/event/add">Add Event</a>
         <a sec:authorize="hasAuthority('Admin')" class="nav-link" href="/organisation/add">Add Organisation</a>
         <a class="nav-link" href="/event/all">All Events</a>
         <a class="nav-link" href="/organisation/all">All Organisations</a>

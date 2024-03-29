@@ -1,10 +1,35 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Event Type Result</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .container {
+            margin-top: 50px;
+        }
+        .card {
+            padding: 20px;
+        }
+    </style>
 </head>
 <body>
-
+<header th:insert="header.html"></header>
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="text-center">Event Type Added Successfully</h3>
+                </div>
+                <div class="card-body">
+                    <p>Event Type Name: <span th:text="${eventType.typeName}"></span></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 </body>
 </html>
+

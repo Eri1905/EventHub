@@ -17,9 +17,8 @@ public class EventTypeController {
     @Autowired
     EventTypeRepository eventTypeRepository;
     @GetMapping("/add")
-    public String addEvent(Model model){
-        model.addAttribute("event", new Event());
-        model.addAttribute("eventTypes", eventTypeRepository.findAll());
+    public String addEventType(Model model){
+        model.addAttribute("eventType", new EventType());
         return "event-type-form";
     }
     @PostMapping("/submit")

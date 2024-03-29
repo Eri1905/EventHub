@@ -24,10 +24,10 @@ public class WebSecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
             http
                     .authorizeHttpRequests((requests) -> requests
-                            .requestMatchers("/registration","/login").permitAll()
+                            .requestMatchers("/registration","registration/submit", "/login").permitAll()
                             .requestMatchers("/film/all").permitAll()
-                            .requestMatchers("/film/add","/home").hasAnyAuthority("Admin", "USER")
-                            .requestMatchers("/actor/**").hasAuthority("ADMIN")
+                            .requestMatchers("/film/add","/home").hasAnyAuthority("Admin", "User")
+                            .requestMatchers("/actor/**").hasAuthority("Admin")
                             .anyRequest().authenticated()
                     )
                 .formLogin((form) -> form

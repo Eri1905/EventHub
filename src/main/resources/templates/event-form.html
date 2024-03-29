@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Add Film</title>
+    <title>Add Event</title>
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
@@ -13,7 +13,7 @@
         <div class="col-md-6">
             <div class="card">
                 <div class="card-header">
-                    <h3 class="text-center">Add Film</h3>
+                    <h3 class="text-center">Add Event</h3>
                 </div>
                 <div class="card-body">
                     <form action="#" th:action="@{/event/submit}" th:object="${event}" method="post">
@@ -58,7 +58,7 @@
                         </div>
 
                         <div>
-                            <button type="submit" class="btn btn-primary btn-block" value="Submit">Add Film</button>
+                            <button type="submit" class="btn btn-primary btn-block" value="Submit">Add Event</button>
                             <button type="reset" class="btn btn-primary btn-block" value="Reset">Reset</button>
                         </div>
                     </form>
