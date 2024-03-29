@@ -4,7 +4,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Title</title>
-  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
   <style>
     /* Custom CSS for navbar */
     .navbar {
@@ -39,8 +41,11 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
       <div class="navbar-nav mr-auto">
-        <a sec:authorize="hasAuthority('Admin') or hasAuthority('Manager')" class="nav-link" href="/event/add">Add Event</a>
-        <a sec:authorize="hasAuthority('Admin')" class="nav-link" href="/organisation/add">Add Organisation</a>
+        <a sec:authorize="hasAuthority('Admin')"  class="nav-link" href="/event/add">Add Event</a>
+        <a sec:authorize="hasAuthority('Manager')"  class="nav-link" href="/event/add">Add Event</a>
+        <a sec:authorize="hasAuthority('Manager') or hasAuthority('Admin')" class="nav-link" href="/event-type/add">Add Event Type</a>
+        <a sec:authorize="hasAuthority('Manager') or hasAuthority('Admin')"  class="nav-link" href="/event-type/all">All Event Types</a>
+        <a sec:authorize="hasAuthority('Admin') " class="nav-link" href="/organisation/add">Add Organisation</a>
         <a class="nav-link" href="/event/all">All Events</a>
         <a class="nav-link" href="/organisation/all">All Organisations</a>
       </div>

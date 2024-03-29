@@ -2,21 +2,10 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Add Event Type</title>
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-    <style>
-        .form-group {
-            margin-bottom: 20px;
-        }
-        .card {
-            margin-top: 20px;
-        }
-        .error {
-            color: red;
-            font-size: 12px;
-        }
-    </style>
+    <title>Title</title>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
 </head>
 <body>
 <header th:insert="header.html"></header>
@@ -30,17 +19,25 @@
                 <div class="card-body">
                     <form action="#" th:action="@{/event-type/submit}" th:object="${eventType}" method="post">
                         <div class="form-group">
-                            <label for="typeName">Type Name:</label>
-                            <input type="text" id="typeName" class="form-control" th:field="*{typeName}" required>
-                            <span class="error" th:if="${#fields.hasErrors('typeName')}" th:errors="*{typeName}"></span>
+                            Event type:
+                            <input type="text" th:field="*{typeName}">
+                            <span th:if="${#fields.hasErrors('typeName')}" th:errors="*{typeName}"></span>
                         </div>
-                        <button type="submit" class="btn btn-primary btn-block">Add Event Type</button>
+
+                        <div>
+                            <button type="submit" class="btn btn-primary btn-block" value="Submit">Add event</button>
+                            <button type="reset" class="btn btn-primary btn-block" value="Reset">Reset</button>
+                        </div>
                     </form>
                 </div>
+                </form>
             </div>
         </div>
     </div>
 </div>
+</div>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>
-

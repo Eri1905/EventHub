@@ -16,7 +16,8 @@
         <div class="col-md-6 offset-md-3">
             <div class="card">
                 <div class="card-body text-center">
-                    <h1 class="card-title">User Profile</h1>
+                    <h3>First name: <span th:text="${#authentication.principal.firstName}"></span></h3>
+                    <h3>Last name: <span th:text="${#authentication.principal.lastName}"></span></h3>
                     <h3>Username: <span th:text="${#authentication.principal.username}"></span></h3>
                     <h3>Role: <span th:text="${#authentication.principal.role}"></span></h3>
                     <h3>Email: <span th:text="${#authentication.principal.email}"></span></h3>
