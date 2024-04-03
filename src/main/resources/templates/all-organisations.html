@@ -6,9 +6,11 @@
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="styles.css" rel="stylesheet">
 </head>
 <body>
-<header th:insert="header.html"></header>
+<header th:insert="~{header.html}"></header>
 
 <table class="table table-bordered border-warning">
     <thead>
@@ -31,9 +33,9 @@
     <tr>
     <tr th:each="organisation : ${allOrganisation}">
         <th class="p-3 text-primary-emphasis bg-primary-subtle border border-primary-subtle rounded-3" scope="row"
-            th:text="${organisation.id}"/>
+            th:text="${organisation.id}"></th>
         <th class="p-3 text-primary-emphasis bg-primary-subtle border border-primary-subtle rounded-3" scope="row"
-            th:text="${organisation.organisationName}"/>
+            th:text="${organisation.organisationName}"></th>
         <td>
                 <a  class="btn btn-primary" sec:authorize="hasAuthority('Admin')" th:href="@{'/organisation/update?id=' + ${organisation.id}}">Update</a>
         </td>

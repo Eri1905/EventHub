@@ -2,8 +2,6 @@ package com.example.EventHub.User;
 
 import com.example.EventHub.Role.Role;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotEmpty;
-import org.hibernate.validator.constraints.UniqueElements;
 
 
 @Entity

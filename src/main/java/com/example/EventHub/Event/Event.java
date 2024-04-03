@@ -16,31 +16,21 @@ public class Event {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
-    @NotEmpty(message = "The name of the event can not be empty!")
     private String name;
-    @NotEmpty(message = "Fill in the date of the event!")
     private Date date;
-    @NotNull(message = "Please enter the duration of the event!")
     private int duration;
-    @NotEmpty(message = "Please enter description!")
     private String description;
-    @NotEmpty(message = "Please enter the place of the event!")
     private String place;
-    @NotNull(message = "Please enter the price of the ticket for the event!")
     private int ticketPrice;
-    @NotNull(message = "Please enter the capacity of the event!")
     private int capacity;
-    @NotEmpty(message = "Please choose organisation!")
     @ManyToOne
     @JoinColumn(name = "organisation_id")
     private Organisation organisation;
 
-    @NotEmpty(message = "Please choose event type!")
     @ManyToOne
     @JoinColumn(name = "event_type_id")
     private EventType eventType;
 
-    @NotEmpty(message = "Please choose event status")
     @ManyToOne
     @JoinColumn(name = "event_status")
     private EventStatus eventStatus;

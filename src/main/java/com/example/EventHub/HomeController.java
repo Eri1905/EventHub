@@ -37,41 +37,5 @@ public class HomeController {
         return "login-email";
     }
 
-    @GetMapping("/registration")
-    public String addUser(Model model) {
-        model.addAttribute("user", new UserDTO());
-        model.addAttribute("roles", roleRepository.findAll());
-        return "registration";
-    }
 
-    @PostMapping("/registration/submit")
-    public String postRegister(@Valid @ModelAttribute UserDTO userDTO, BindingResult bindingResult, Model model) {
-        if (bindingResult.hasErrors()) {
-            model.addAttribute("roles", roleRepository.findAll());
-            return "registration";
-        }
-        User userForSeeIfUsernameExist = userRepository.getUserByUsername(userDTO.getUsername());
-        if (userForSeeIfUsernameExist != null) {
-            model.addAttribute("userExistMessage", "This username already exists!");
-            model.addAttribute("roles", roleRepository.findAll());
-            return "registration";
-        }
-
-        User userForSeeIfEmailExist = userRepository.getUserByEmail(userDTO.getEmail());
-        if (userForSeeIfEmailExist != null) {
-            model.addAttribute("emailExistMessage", "This email already exists!");
-            model.addAttribute("roles", roleRepository.findAll());
-            return "registration";
-        }
-
-        if (!userService.ifTwoPasswordsMatch(userDTO.getPassword(), userDTO.getConfirmPassword())) {
-            model.addAttribute("passwordsDoNotMatch", "Passwords do not match!");
-            model.addAttribute("roles", roleRepository.findAll());
-            return "registration";
-        }
-
-        User user = userMapper.toEntity(userDTO);
-        userRepository.save(user);
-        return "login";
-    }
 }

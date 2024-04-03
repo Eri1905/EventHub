@@ -2,6 +2,8 @@ package com.example.EventHub.User;
 
 import com.example.EventHub.Role.Role;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Size;
 import org.hibernate.validator.constraints.UniqueElements;
@@ -9,7 +11,8 @@ import org.hibernate.validator.constraints.UniqueElements;
 public class UserDTO {
 
     @NotEmpty(message = "Username cannot be empty!")
-    @Size(min = 4, max = 20, message = "Username should be between 4 and 20 symbols!")
+    @Min(value = 4, message = "Username can´t be less than 4 characters!")
+    @Max(value = 20, message = "Username can´t be more than 20 characters!")
     private String username;
     @NotEmpty(message = "Please enter email!")
     private String email;
@@ -18,10 +21,12 @@ public class UserDTO {
     @NotEmpty(message = "Please enter last name!")
     private String lastName;
     @NotEmpty(message = "Fill in the password!")
-    @Size(min = 6, max = 20, message = "Password should be between 6 and 20 symbols!")
+    @Min(value = 6, message = "Password can´t be less than 6 characters!")
+    @Max(value = 30, message = "Password can´t be more than 30 characters!")
     private String password;
     @NotEmpty(message = "Please confirm the password!")
-    @Size(min = 6, max = 20, message = "Password should be between 6 and 20 symbols!")
+    @Min(value = 6, message = "Password can´t be less than 6 characters!")
+    @Max(value = 30, message = "Password can´t be more than 30 characters!")
     private String confirmPassword;
 
     private Role role;

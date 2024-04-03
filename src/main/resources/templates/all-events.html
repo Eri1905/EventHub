@@ -8,10 +8,12 @@
             crossorigin="anonymous"></script>
     <meta charset="UTF-8">
     <title>Title</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="styles.css" rel="stylesheet">
 </head>
 <body>
-<header th:insert="header.html"></header>
-
+<header th:insert="~{header.html}"></header>
+<iframe src="search.html" width="100%" height="300px"></iframe>
 <table class="table table-bordered border-warning">
     <thead>
     <tr>
@@ -58,25 +60,25 @@
     <tr>
     <tr th:each="event : ${allEvents}">
         <th class="p-3 text-primary-emphasis bg-primary-subtle border border-primary-subtle rounded-3" scope="row"
-            th:text="${event.name}"/>
+            th:text="${event.name}"></th>
         <td class="p-3 text-danger-emphasis bg-danger-subtle border border-danger-subtle rounded-3"
-            th:text="${event.date}"/>
+            th:text="${event.date}"></td>
         <td class="p-3 text-danger-emphasis bg-danger-subtle border border-danger-subtle rounded-3"
-            th:text="${event.duration}"/>
+            th:text="${event.duration}"></td>
         <td class="p-3 text-success-emphasis bg-success-subtle border border-success-subtle rounded-3"
-            th:text="${event.description}"/>
+            th:text="${event.description}"></td>
         <td class="p-3 text-success-emphasis bg-success-subtle border border-success-subtle rounded-3"
-            th:text="${event.place}"/>
+            th:text="${event.place}"></td>
         <td class="p-3 text-success-emphasis bg-success-subtle border border-success-subtle rounded-3"
-            th:text="${event.ticketPrice}"/>
+            th:text="${event.ticketPrice}"></td>
         <td class="p-3 text-success-emphasis bg-success-subtle border border-success-subtle rounded-3"
-            th:text="${event.capacity}"/>
+            th:text="${event.capacity}"></td>
         <td class="p-3 text-success-emphasis bg-success-subtle border border-success-subtle rounded-3"
-            th:text="${event.organisation.organisationName}"/>
+            th:text="${event.organisation.organisationName}"></td>
         <td class="p-3 text-success-emphasis bg-success-subtle border border-success-subtle rounded-3"
-            th:text="${event.eventType.typeName}"/>
+            th:text="${event.eventType.typeName}"></td>
         <td class="p-3 text-success-emphasis bg-success-subtle border border-success-subtle rounded-3"
-            th:text="${event.eventStatus}"/>
+            th:text="${event.eventStatus}"></td>
         <td>
             <a  class="btn btn-primary" sec:authorize="hasAuthority('Admin')" th:href="@{'/event/update?id=' + ${event.id}}">Update</a>
         </td>

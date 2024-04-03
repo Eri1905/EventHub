@@ -1,5 +1,6 @@
 package com.example.EventHub.User;
 
+import com.example.EventHub.Role.RoleRepository;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -13,21 +14,48 @@ import org.springframework.web.bind.annotation.PostMapping;
 public class UserController {
     @Autowired
     UserRepository userRepository;
+    @Autowired
+    RoleRepository roleRepository;
+    @Autowired
+    UserService userService;
+    @Autowired
+    UserMapper userMapper;
 
-    @GetMapping("/registration/add")
-    public String registrationForm(Model model) {
-        model.addAttribute("user", new User());
-        return "registration-form";
+    @GetMapping("/registration")
+    public String addUser(Model model) {
+        model.addAttribute("user", new UserDTO());
+        model.addAttribute("roles", roleRepository.findAll());
+        return "registration";
     }
 
     @PostMapping("/registration/submit")
-    public String postRegister(@Valid @ModelAttribute User user, BindingResult bindingResult) {
+    public String postRegister(@Valid @ModelAttribute UserDTO userDTO, BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors()) {
-            return "registration-form";
-        }else{
-
-            userRepository.save(user);
-            return "/login";
+            model.addAttribute("roles", roleRepository.findAll());
+            return "registration";
         }
+        User userForSeeIfUsernameExist = userRepository.getUserByUsername(userDTO.getUsername());
+        if (userForSeeIfUsernameExist != null) {
+            model.addAttribute("userExistMessage", "This username already exists!");
+            model.addAttribute("roles", roleRepository.findAll());
+            return "registration";
+        }
+
+        User userForSeeIfEmailExist = userRepository.getUserByEmail(userDTO.getEmail());
+        if (userForSeeIfEmailExist != null) {
+            model.addAttribute("emailExistMessage", "This email already exists!");
+            model.addAttribute("roles", roleRepository.findAll());
+            return "registration";
+        }
+
+        if (!userService.ifTwoPasswordsMatch(userDTO.getPassword(), userDTO.getConfirmPassword())) {
+            model.addAttribute("passwordsDoNotMatch", "Passwords do not match!");
+            model.addAttribute("roles", roleRepository.findAll());
+            return "registration";
+        }
+        User user = userMapper.toEntity(userDTO);
+        model.addAttribute("user", user);
+        userRepository.save(user);
+        return "profile";
     }
 }
