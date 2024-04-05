@@ -13,7 +13,7 @@
 </head>
 <body>
 <header th:insert="~{header.html}"></header>
-<iframe src="search.html" width="100%" height="300px"></iframe>
+<iframe class="search-container" src="events-filter.html" ></iframe>
 <table class="table table-bordered border-warning">
     <thead>
     <tr>
@@ -78,7 +78,7 @@
         <td class="p-3 text-success-emphasis bg-success-subtle border border-success-subtle rounded-3"
             th:text="${event.eventType.typeName}"></td>
         <td class="p-3 text-success-emphasis bg-success-subtle border border-success-subtle rounded-3"
-            th:text="${event.eventStatus}"></td>
+            th:text="${event.eventStatus.status}"></td>
         <td>
             <a  class="btn btn-primary" sec:authorize="hasAuthority('Admin')" th:href="@{'/event/update?id=' + ${event.id}}">Update</a>
         </td>

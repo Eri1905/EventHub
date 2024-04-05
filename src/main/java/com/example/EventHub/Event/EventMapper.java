@@ -11,6 +11,7 @@ public class EventMapper {
         event.setDuration(eventDTO.getDuration());
         event.setDescription(eventDTO.getDescription());
         event.setPlace(eventDTO.getPlace());
+        event.setTime(eventDTO.getTime());
         event.setTicketPrice(eventDTO.getTicketPrice());
         event.setCapacity(eventDTO.getCapacity());
         event.setOrganisation(eventDTO.getOrganisation());

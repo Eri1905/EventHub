@@ -17,10 +17,11 @@ public class Event {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
     private String name;
-    private Date date;
+    private String date;
     private int duration;
     private String description;
     private String place;
+    private String time;
     private int ticketPrice;
     private int capacity;
     @ManyToOne
@@ -52,11 +53,11 @@ public class Event {
         this.name = name;
     }
 
-    public Date getDate() {
+    public String getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(String date) {
         this.date = date;
     }
 
@@ -82,6 +83,14 @@ public class Event {
 
     public void setPlace(String place) {
         this.place = place;
+    }
+
+    public String getTime() {
+        return time;
+    }
+
+    public void setTime(String time) {
+        this.time = time;
     }
 
     public int getTicketPrice() {

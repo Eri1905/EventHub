@@ -1,7 +1,9 @@
 package com.example.EventHub.Event;
 
+import com.example.EventHub.EventStatus.EventStatusRepository;
 import com.example.EventHub.EventType.EventType;
 import com.example.EventHub.EventType.EventTypeRepository;
+import com.example.EventHub.Organisation.OrganisationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
@@ -16,13 +18,19 @@ public class EventService {
     EventRepository eventRepository;
     @Autowired
     EventTypeRepository eventTypeRepository;
+    @Autowired
+    OrganisationRepository organisationRepository;
+    @Autowired
+    EventStatusRepository eventStatusRepository;
 
     public String updateForm(Integer id, Model model) {
 
         Optional<Event> optionalEvent = eventRepository.findById(id);
         if (optionalEvent.isPresent()) {
             Event event = eventRepository.findById(id).get();
-            model.addAttribute("allEventTypes", eventTypeRepository.findAll());
+            model.addAttribute("eventTypes", eventTypeRepository.findAll());
+            model.addAttribute("organisations", organisationRepository.findAll());
+            model.addAttribute("allStatuses", eventStatusRepository.findAll());
             model.addAttribute("updateEvent", event);
             return "event-update-form";
         } else {
@@ -31,9 +39,10 @@ public class EventService {
     }
 
     public String postUpdate(Integer id, Event updatedEvent, BindingResult bindingResult, Model model) {
-
         if (bindingResult.hasErrors()) {
-            model.addAttribute("allEventTypes", eventTypeRepository.findAll());
+            model.addAttribute("eventTypes", eventTypeRepository.findAll());
+            model.addAttribute("organisations", organisationRepository.findAll());
+            model.addAttribute("allStatuses", eventStatusRepository.findAll());
             return "event-update-form";
         } else {
             Event event = eventRepository.findById(id).get();

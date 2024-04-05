@@ -20,17 +20,21 @@
                     <h3 class="text-center">Add Event</h3>
                 </div>
                 <div class="card-body">
-                    <form action="#" th:action="@{/event/submit}" th:object="${event}" method="post">
+                    <form action="#" th:action="@{/event/submit}" th:object="${eventDTO}" method="post">
                         <div class="form-group">
                             Event name:
                             <input type="text" th:field="*{name}">
                             <span th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></span>
                         </div>
-
                         <div class="form-group">
                             Date:
                             <input type="date" th:field="*{date}">
                             <span th:if="${#fields.hasErrors('date')}" th:errors="*{date}"></span>
+                        </div>
+                        <div class="form-group">
+                            Start time:
+                            <input type="time" th:field="*{time}">
+                            <span th:if="${#fields.hasErrors('time')}" th:errors="*{time}"></span>
                         </div>
                         <div class="form-group">
                             Duration:

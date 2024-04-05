@@ -12,13 +12,15 @@ import java.util.Date;
 public class EventDTO {
         @NotEmpty(message = "The name of the event can not be empty!")
         private String name;
-        private Date date;
+        private String date;
         @NotNull(message = "Please enter the duration of the event!")
         private int duration;
         @NotEmpty(message = "Please enter description!")
         private String description;
         @NotEmpty(message = "Please enter the place of the event!")
         private String place;
+        @NotEmpty(message = "Please enter the start tim eof the event!")
+        private String time;
         @NotNull(message = "Please enter the price of the ticket for the event!")
         private int ticketPrice;
         @NotNull(message = "Please enter the capacity of the event!")
@@ -35,11 +37,11 @@ public class EventDTO {
             this.name = name;
         }
 
-        public Date getDate() {
+        public String getDate() {
             return date;
         }
 
-        public void setDate(Date date) {
+        public void setDate(String date) {
             this.date = date;
         }
 
@@ -67,7 +69,15 @@ public class EventDTO {
             this.place = place;
         }
 
-        public int getTicketPrice() {
+    public String getTime() {
+        return time;
+    }
+
+    public void setTime(String time) {
+        this.time = time;
+    }
+
+    public int getTicketPrice() {
             return ticketPrice;
         }
 

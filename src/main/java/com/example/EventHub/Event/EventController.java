@@ -33,7 +33,7 @@ public class EventController {
 
     @GetMapping("/add")
     public String addEvent(Model model) {
-        model.addAttribute("event", new EventDTO());
+        model.addAttribute("eventDTO", new EventDTO());
         model.addAttribute("eventTypes", eventTypeRepository.findAll());
         model.addAttribute("organisations", organisationRepository.findAll());
         model.addAttribute("allStatuses", eventStatusRepository.findAll());
