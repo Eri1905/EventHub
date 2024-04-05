@@ -23,7 +23,7 @@ public class UserController {
 
     @GetMapping("/registration")
     public String addUser(Model model) {
-        model.addAttribute("user", new UserDTO());
+        model.addAttribute("userDTO", new UserDTO());
         model.addAttribute("roles", roleRepository.findAll());
         return "registration";
     }
@@ -56,6 +56,6 @@ public class UserController {
         User user = userMapper.toEntity(userDTO);
         model.addAttribute("user", user);
         userRepository.save(user);
-        return "profile";
+        return "login";
     }
 }

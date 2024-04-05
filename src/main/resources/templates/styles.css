@@ -5,8 +5,9 @@ body {
             margin-top: 50px;
         }
         .search-container {
-                    flex: 0 0 30%; /* Adjust width as needed */
-                    margin-right: 20px; /* Add margin for separation */
+                    color: #808080
+                    flex: 100 1000 100%;
+                    margin-right: 30px;
                 }
         .card {
             margin-top: 20px;

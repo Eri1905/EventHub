@@ -72,18 +72,17 @@ public class EventController {
         return eventService.postUpdate(id, updatedEvent, bindingResult, model);
     }
 
-    @GetMapping("/delete")
+    @PostMapping("/delete")
     public String delete(@RequestParam("id") Integer id, Model model) {
         return eventService.delete(id, model);
     }
 
-    @GetMapping("/events/filter")
+    @PostMapping("/filter")
     public String getEventsBySearchCriteria(
             @RequestParam(required = false) String place,
             @RequestParam(required = false) String eventType,
             @RequestParam(required = false) String date,
             Model model) {
-
         List<Event> eventsFilter = eventService.findEventsBySearchCriteria(place, eventType, date);
         model.addAttribute("eventsFilter", eventsFilter);
         return "events-filter";

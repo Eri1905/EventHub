@@ -11,8 +11,7 @@ import org.hibernate.validator.constraints.UniqueElements;
 public class UserDTO {
 
     @NotEmpty(message = "Username cannot be empty!")
-    @Min(value = 4, message = "Username can´t be less than 4 characters!")
-    @Max(value = 20, message = "Username can´t be more than 20 characters!")
+    @Size(min = 4, max = 20, message = "USername should be between 4 and 20")
     private String username;
     @NotEmpty(message = "Please enter email!")
     private String email;
@@ -21,15 +20,11 @@ public class UserDTO {
     @NotEmpty(message = "Please enter last name!")
     private String lastName;
     @NotEmpty(message = "Fill in the password!")
-    @Min(value = 6, message = "Password can´t be less than 6 characters!")
-    @Max(value = 30, message = "Password can´t be more than 30 characters!")
+    @Size(min = 6, max = 20, message = "Password should be between 4 and 20")
     private String password;
     @NotEmpty(message = "Please confirm the password!")
-    @Min(value = 6, message = "Password can´t be less than 6 characters!")
-    @Max(value = 30, message = "Password can´t be more than 30 characters!")
+    @Size(min =6, max = 20, message = "Password should be between 4 and 20")
     private String confirmPassword;
-
-    private Role role;
 
     public String getUsername() {
         return username;
@@ -79,13 +74,6 @@ public class UserDTO {
         this.confirmPassword = confirmPassword;
     }
 
-    public Role getRole() {
-        return role;
-    }
-
-    public void setRole(Role role) {
-        this.role = role;
-    }
 
 
 }

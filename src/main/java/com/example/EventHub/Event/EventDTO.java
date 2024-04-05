@@ -19,7 +19,7 @@ public class EventDTO {
         private String description;
         @NotEmpty(message = "Please enter the place of the event!")
         private String place;
-        @NotEmpty(message = "Please enter the start tim eof the event!")
+        @NotEmpty(message = "Please enter the start time of the event!")
         private String time;
         @NotNull(message = "Please enter the price of the ticket for the event!")
         private int ticketPrice;

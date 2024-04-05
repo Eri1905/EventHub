@@ -32,10 +32,7 @@ public class HomeController {
     }
     @RequestMapping("/profile")
     public String profile(){return "profile";}
-    @RequestMapping("/login-email")
-    public String loginEmail() {
-        return "login-email";
-    }
+
 
 
 }

@@ -6,61 +6,80 @@
   <title>User Registration</title>
   <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
   <link href="styles.css" rel="stylesheet">
+
+  <style>
+    .error-container {
+      margin-top: 5px;
+    }
+
+    .error-message {
+      color: red;
+      font-size: 0.9em;
+    }
+  </style>
 </head>
 <body>
 <div class="form-container">
   <h1>Registration</h1>
 
-  <form action="#" th:action="@{/registration/submit}" th:object="${user}" method="post">
+  <form action="#" th:action="@{/registration/submit}" th:object="${userDTO}" method="post">
     <div class="form-group">
       Username:
       <input type="text" th:field="*{username}"/>
-      <span th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></span>
-      <div th:if="${userExistMessage}" style="color: red;">
-        <p th:text="${userExistMessage}"></p>
+      <div class="error-container" th:if="${#fields.hasErrors('username')}">
+        <span class="error-message" th:errors="*{username}"></span>
+      </div>
+      <div class="error-container" th:if="${userExistMessage}">
+        <span class="error-message" th:text="${userExistMessage}"></span>
       </div>
     </div>
 
     <div class="form-group">
       First Name:
       <input type="text" th:field="*{firstName}"/>
-      <span th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}"></span>
+      <div class="error-container" th:if="${#fields.hasErrors('firstName')}">
+        <span class="error-message" th:errors="*{firstName}"></span>
+      </div>
     </div>
-    <div class="form-group">
 
+    <div class="form-group">
       Last Name:
       <input type="text" th:field="*{lastName}"/>
-      <span th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}"></span>
+      <div class="error-container" th:if="${#fields.hasErrors('lastName')}">
+        <span class="error-message" th:errors="*{lastName}"></span>
+      </div>
     </div>
 
     <div class="form-group">
       Email:
       <input type="email" th:field="*{email}"/>
-      <span th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></span>
+      <div class="error-container" th:if="${#fields.hasErrors('email')}">
+        <span class="error-message" th:errors="*{email}"></span>
+      </div>
+      <div class="error-container" th:if="${emailExistMessage}">
+        <span class="error-message" th:text="${emailExistMessage}"></span>
+      </div>
     </div>
-    <div th:if="${emailExistMessage}" style="color: red;">
-      <p th:text="${emailExistMessage}"></p>
-    </div>
-    <div th:if="${passwordsDoNotMatch}" style="color: red;">
-      <p th:text="${passwordsDoNotMatch}"></p>
-    </div>
+
     <div class="form-group">
       Password:
       <input type="password" th:field="*{password}"/>
-      <span th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></span>
+      <div class="error-container" th:if="${#fields.hasErrors('password')}">
+        <span class="error-message" th:errors="*{password}"></span>
+      </div>
     </div>
+
     <div class="form-group">
       Confirm password:
       <input type="password" th:field="*{confirmPassword}"/>
-      <span th:if="${#fields.hasErrors('confirmPassword')}" th:errors="*{confirmPassword}"></span>
+      <div class="error-container" th:if="${#fields.hasErrors('confirmPassword')}">
+        <span class="error-message" th:errors="*{confirmPassword}"></span>
+      </div>
+      <div class="error-container" th:if="${passwordsDoNotMatch}">
+        <span class="error-message" th:text="${passwordsDoNotMatch}"></span>
+      </div>
     </div>
-    <div class="form-group">
-    <select th:field="*{role}" class="form-select" aria-label="Role selection">
-      <p th:each="role : ${roles}">
-        <option th:if="${role.id != '1'}" th:value="${role.id}" th:text="${role.roleName}"></option>
-      </p>
-    </select>
-    </div>
+
     <div class="form-group">
       <button type="submit">Register</button>
     </div>
@@ -68,4 +87,5 @@
 </div>
 </body>
 </html>
+
 
