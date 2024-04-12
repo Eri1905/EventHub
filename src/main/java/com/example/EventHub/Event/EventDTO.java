@@ -6,6 +6,7 @@ import com.example.EventHub.Organisation.Organisation;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.Date;
 
@@ -25,9 +26,9 @@ public class EventDTO {
         private int ticketPrice;
         @NotNull(message = "Please enter the capacity of the event!")
         private int capacity;
+        private MultipartFile file;
         private Organisation organisation;
         private EventType eventType;
-        private EventStatus eventStatus;
 
         public String getName() {
             return name;
@@ -93,7 +94,15 @@ public class EventDTO {
             this.capacity = capacity;
         }
 
-        public Organisation getOrganisation() {
+    public MultipartFile getFile() {
+        return file;
+    }
+
+    public void setFile(MultipartFile file) {
+        this.file = file;
+    }
+
+    public Organisation getOrganisation() {
             return organisation;
         }
 
@@ -109,12 +118,5 @@ public class EventDTO {
             this.eventType = eventType;
         }
 
-        public EventStatus getEventStatus() {
-            return eventStatus;
-        }
-
-        public void setEventStatus(EventStatus eventStatus) {
-            this.eventStatus = eventStatus;
-        }
     }
 

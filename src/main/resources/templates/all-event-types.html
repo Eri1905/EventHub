@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-    <link href="styles.css" rel="stylesheet">
+    <link href="../static/styles.css" rel="stylesheet">
 </head>
 <body>
 <header th:insert="~{header.html}"></header>
@@ -16,17 +16,11 @@
     <thead>
     <tr>
         <th class="p-3 text-primary-emphasis bg-primary-subtle border border-primary-subtle rounded-3" scope="col">
-            id
+            ID
         </th>
         <th class="p-3 text-primary-emphasis bg-primary-subtle border border-primary-subtle rounded-3" scope="col">
             Type
         </th>
-<!--        <th class="p-3 text-primary-emphasis bg-primary-subtle border border-primary-subtle rounded-3" scope="col">-->
-<!--            Update-->
-<!--        </th>-->
-<!--        <th class="p-3 text-primary-emphasis bg-primary-subtle border border-primary-subtle rounded-3" scope="col">-->
-<!--            Delete-->
-<!--        </th>-->
     </tr>
     </thead>
     <tbody>
@@ -36,12 +30,14 @@
             th:text="${eventType.id}"></th>
         <th class="p-3 text-primary-emphasis bg-primary-subtle border border-primary-subtle rounded-3" scope="row"
             th:text="${eventType.typeName}"></th>
-<!--        <a  class="btn btn-primary" sec:authorize="hasAuthority('Admin')" th:href="@{'/actor/update?id=' + ${actor.id}}">Update</a>-->
-
-<!--        <form action="#" sec:authorize="hasAuthority('Admin')" th:action="@{'/actor/delete?id=' + ${actor.id}}" method="post">-->
-<!--            <button type="submit">Delete</button>-->
-<!--        </form>-->
-
+        <td>
+            <a  class="btn btn-primary" sec:authorize="hasAuthority('Admin')" th:href="@{'/event-type/update?id=' + ${eventType.id}}">Update</a>
+        </td>
+        <td>
+            <form action="#" sec:authorize="hasAuthority('Admin')" th:action="@{'/event-type/delete?id=' + ${eventType.id}}" method="post">
+                <button type="submit">Delete</button>
+            </form>
+        </td>
     </tr>
     </tr>
 

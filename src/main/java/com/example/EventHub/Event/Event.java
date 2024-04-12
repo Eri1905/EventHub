@@ -3,11 +3,14 @@ package com.example.EventHub.Event;
 import com.example.EventHub.EventStatus.EventStatus;
 import com.example.EventHub.EventType.EventType;
 import com.example.EventHub.Organisation.Organisation;
+import com.example.EventHub.User.User;;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotEmpty;
-import jakarta.validation.constraints.NotNull;
-
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.Date;
+import java.util.List;
 
 
 @Entity
@@ -24,6 +27,10 @@ public class Event {
     private String time;
     private int ticketPrice;
     private int capacity;
+
+    @Lob
+    @Column(columnDefinition = "MEDIUMBLOB")
+    private String image;
     @ManyToOne
     @JoinColumn(name = "organisation_id")
     private Organisation organisation;
@@ -32,10 +39,14 @@ public class Event {
     @JoinColumn(name = "event_type_id")
     private EventType eventType;
 
-    @ManyToOne
-    @JoinColumn(name = "event_status")
+    @Enumerated(EnumType.STRING)
     private EventStatus eventStatus;
-
+    @ManyToMany
+    @JoinTable(
+    name = "events_users",
+    joinColumns = @JoinColumn(name = "event_id"),
+    inverseJoinColumns = @JoinColumn(name = "user_id"))
+    List<User>users;
 
     public Integer getId() {
         return id;
@@ -109,6 +120,14 @@ public class Event {
         this.capacity = capacity;
     }
 
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
+
     public Organisation getOrganisation() {
         return organisation;
     }
@@ -125,11 +144,34 @@ public class Event {
         this.eventType = eventType;
     }
 
+
     public EventStatus getEventStatus() {
-        return eventStatus;
+        LocalDate localDate=LocalDate.now();
+        try {
+            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+            Date eventDate = dateFormat.parse(date);
+            Date local = Date.from(localDate.atStartOfDay(ZoneId.systemDefault()).toInstant());
+            if (eventDate.before(local)) {
+                eventStatus=EventStatus.FINISHED;
+            }
+            else {
+                eventStatus=EventStatus.AVAILABLE;
+            }
+        }catch (ParseException ex){
+            System.out.println("Parsing error!" + ex);
+        }
+        return this.eventStatus;
     }
 
     public void setEventStatus(EventStatus eventStatus) {
         this.eventStatus = eventStatus;
+    }
+
+    public List<User> getUsers() {
+        return users;
+    }
+
+    public void setUsers(List<User> users) {
+        this.users = users;
     }
 }

@@ -1,7 +1,10 @@
 package com.example.EventHub.User;
 
+import com.example.EventHub.Event.Event;
 import com.example.EventHub.Role.Role;
 import jakarta.persistence.*;
+
+import java.util.List;
 
 
 @Entity
@@ -25,6 +28,16 @@ public class User {
     @ManyToOne
     @JoinColumn(name = "role_id")
     private Role role;
+    @ManyToMany(mappedBy = "users")
+    private List<Event> events;
+
+    public List<Event> getEvents() {
+        return events;
+    }
+
+    public void setEvents(List<Event> events) {
+        this.events = events;
+    }
 
     private boolean enabled=true;
 
