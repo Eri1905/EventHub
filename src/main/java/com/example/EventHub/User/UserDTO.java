@@ -20,10 +20,10 @@ public class UserDTO {
     @NotEmpty(message = "Please enter last name!")
     private String lastName;
     @NotEmpty(message = "Fill in the password!")
-    @Size(min = 6, max = 20, message = "Password should be between 4 and 20")
+    @Size(min = 6, max = 20, message = "Password should be between 6 and 20")
     private String password;
     @NotEmpty(message = "Please confirm the password!")
-    @Size(min =6, max = 20, message = "Password should be between 4 and 20")
+    @Size(min =6, max = 20, message = "Password should be between 6 and 20")
     private String confirmPassword;
 
     public String getUsername() {

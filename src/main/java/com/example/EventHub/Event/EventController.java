@@ -73,7 +73,7 @@ public class EventController {
     }
 
     @GetMapping("/{eventId}")
-    public String getEventDetails(@PathVariable Integer eventId, Model model) throws ParseException {
+    public String getEventDetails(@PathVariable Integer eventId, Model model) {
         Optional<Event> optionalEvent = eventRepository.findById(eventId);
         if (optionalEvent.isPresent()) {
             Event event = optionalEvent.get();
@@ -85,13 +85,14 @@ public class EventController {
     }
 
     @GetMapping("/search")
-    public String searchEvents(@RequestParam(name = "place") String place,
-                               @RequestParam(name = "type") Integer type,
-                               @RequestParam(name = "date") String date,
-                               @RequestParam(name = "minPrice") Double minPrice,
-                               @RequestParam(name = "maxPrice") Double maxPrice,
+    public String searchEvents(@RequestParam(name = "name", required = false) String name,
+                               @RequestParam(name = "place", required = false) String place,
+                               @RequestParam(name = "type", required = false) Integer type,
+                               @RequestParam(name = "date", required = false) String date,
+                               @RequestParam(name = "minPrice", required = false) Double minPrice,
+                               @RequestParam(name = "maxPrice", required = false) Double maxPrice,
                                Model model) {
-        return eventService.searchEvents(place, type, date, minPrice, maxPrice, model);
+        return eventService.searchEvents(name, place, type, date, minPrice, maxPrice, model);
     }
 
     @GetMapping("/update")
@@ -115,11 +116,11 @@ public class EventController {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String username = authentication.getName();
         User user = userRepository.getUserByUsername(username);
-
         Event event = eventRepository.findById(id).get();
         List<Event> events = user.getEvents();
         for (Event listEvent : events) {
             if (listEvent.equals(event)) {
+                model.addAttribute("alreadyApplied", "You have already applied for this event!");
                 model.addAttribute("event", event);
                 return "event-details";
             }
@@ -130,6 +131,7 @@ public class EventController {
         eventRepository.save(event);
 
         model.addAttribute("event", event);
+        model.addAttribute("successfullyApplied", "You have successfully applied for the event!");
         return "event-details";
     }
 }

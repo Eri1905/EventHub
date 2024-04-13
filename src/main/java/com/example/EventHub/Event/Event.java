@@ -25,7 +25,7 @@ public class Event {
     private String description;
     private String place;
     private String time;
-    private int ticketPrice;
+    private double ticketPrice;
     private int capacity;
 
     @Lob
@@ -104,11 +104,11 @@ public class Event {
         this.time = time;
     }
 
-    public int getTicketPrice() {
+    public double getTicketPrice() {
         return ticketPrice;
     }
 
-    public void setTicketPrice(int ticketPrice) {
+    public void setTicketPrice(double ticketPrice) {
         this.ticketPrice = ticketPrice;
     }
 
@@ -159,6 +159,9 @@ public class Event {
             }
         }catch (ParseException ex){
             System.out.println("Parsing error!" + ex);
+        }
+        if (users.size()>=capacity){
+            eventStatus=EventStatus.FULL;
         }
         return this.eventStatus;
     }

@@ -23,7 +23,7 @@ public class EventDTO {
         @NotEmpty(message = "Please enter the start time of the event!")
         private String time;
         @NotNull(message = "Please enter the price of the ticket for the event!")
-        private int ticketPrice;
+        private double ticketPrice;
         @NotNull(message = "Please enter the capacity of the event!")
         private int capacity;
         private MultipartFile file;
@@ -78,11 +78,11 @@ public class EventDTO {
         this.time = time;
     }
 
-    public int getTicketPrice() {
+    public double getTicketPrice() {
             return ticketPrice;
         }
 
-        public void setTicketPrice(int ticketPrice) {
+        public void setTicketPrice(double ticketPrice) {
             this.ticketPrice = ticketPrice;
         }
 

@@ -9,13 +9,25 @@
         .event-details {
             padding: 20px;
         }
-        .event-details h2 {
-            font-size: 28px;
+        .event-details h1 {
+            font-size: 32px;
             margin-bottom: 20px;
         }
-        .event-details p {
+        .event-image {
+            max-width: 100%;
+            height: 300px; /* Set a fixed height for all images */
+            object-fit: cover; /* Maintain aspect ratio */
+            margin-bottom: 20px;
+        }
+        .event-info {
             font-size: 18px;
-            margin-bottom: 10px;
+            margin-bottom: 15px;
+        }
+        .btn-container {
+            text-align: center;
+        }
+        .btn-container button {
+            margin: 5px;
         }
     </style>
 </head>
@@ -25,38 +37,38 @@
     <div class="row">
         <div class="col-md-12">
             <div class="event-details">
-                <div style="text-align: center;">
-                    <h1 th:text="${event.name}"></h1>
-                    <div style="display: flex; align-items: center;">
-                        <div style="flex: 1;">
-                            <img th:src="'data:image/jpeg;base64,' + ${event.image}" alt="Event Image" style="max-width: 100%; height: auto;">
-                        </div>
-                        <div style="flex: 2; padding-left: 20px;">
-                            <h4>Date: <span th:text="${event.date}"></span></h4>
-                            <h4>Place: <span th:text="${event.place}"></span></h4>
-                            <h4>Starting time: <span th:text="${event.time}"></span></h4>
-                            <h4>Duration: <span th:text="${event.duration}"></span></h4>
-                            <h4>Description: <span th:text="${event.description}"></span></h4>
-                            <h4>Ticket price: <span th:text="${event.ticketPrice}"></span></h4>
-                            <h4>Capacity: <span th:text="${event.capacity}"></span></h4>
-                            <h4>Organisation: <span th:text="${event.organisation.organisationName}"></span></h4>
-                            <h4>Event type: <span th:text="${event.eventType.typeName}"></span></h4>
-                            <h4>Status: <span th:text="${event.eventStatus}"></span></h4>
+                <h1 th:text="${event.name}"></h1>
+                <div class="row">
+                    <div class="col-md-6">
+                        <img th:src="'data:image/jpeg;base64,' + ${event.image}" alt="Event Image" class="event-image">
+                    </div>
+                    <div class="col-md-6">
+                        <div class="event-info">
+                            <strong>Date:</strong> <span th:text="${event.date}"></span><br>
+                            <strong>Place:</strong> <span th:text="${event.place}"></span><br>
+                            <strong>Starting time:</strong> <span th:text="${event.time}"></span><br>
+                            <strong>Duration:</strong> <span th:text="${event.duration}"></span><br>
+                            <strong>Description:</strong> <span th:text="${event.description}"></span><br>
+                            <strong>Ticket price:</strong> <span th:text="${event.ticketPrice}"></span><br>
+                            <strong>Capacity:</strong> <span th:text="${event.capacity}"></span><br>
+                            <strong>Organisation:</strong> <span th:text="${event.organisation.organisationName}"></span><br>
+                            <strong>Event type:</strong> <span th:text="${event.eventType.typeName}"></span><br>
+                            <strong>Status:</strong> <span th:text="${event.eventStatus}"></span>
                         </div>
                     </div>
                 </div>
-                <td>
-                    <a  class="btn btn-primary" sec:authorize="hasAuthority('Admin')" th:href="@{'/event/update?id=' + ${event.id}}">Update</a>
-                </td>
-                <td>
-                <form action="#" class="btn btn-primary" sec:authorize="hasAuthority('Admin')" th:action="@{'/event/delete?id=' + ${event.id}}" method="post">
-                    <a type="submit">Delete</a>
-                </form>
-            </td>
-                <td><form action="#" class="btn btn-primary" sec:authorize="hasAuthority('User')" th:action="@{/event/apply}" method="post">
-                    <input type="hidden" name="eventId" th:value="${event.id}"/>
-                    <button type="submit">Apply</button>
-                </form></td>
+                <div class="btn-container">
+                    <a class="btn btn-primary" sec:authorize="hasAuthority('Admin')" th:href="@{'/event/update?id=' + ${event.id}}">Update</a>
+                    <form action="#" sec:authorize="hasAuthority('Admin')" th:action="@{'/event/delete?id=' + ${event.id}}" method="post">
+                        <button type="submit" class="btn btn-danger">Delete</button>
+                    </form>
+                    <form th:unless="${alreadyApplied}" action="#" class="btn btn-primary" sec:authorize="hasAuthority('User')" th:action="@{/event/apply}" method="post">
+                        <input type="hidden" name="eventId" th:value="${event.id}"/>
+                        <button type="submit" class="btn btn-success">Apply</button>
+                    </form>
+                    <p th:if="${alreadyApplied}" th:text="${alreadyApplied}"></p>
+                    <p th:if="${successfullyApplied}" th:text="${successfullyApplied}"></p>
+                </div>
             </div>
         </div>
     </div>

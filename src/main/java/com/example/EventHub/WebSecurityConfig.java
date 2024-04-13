@@ -26,7 +26,8 @@ public class WebSecurityConfig {
                     .authorizeHttpRequests((requests) -> requests
                             .requestMatchers("/registration","registration/submit", "/home", "/event/all", "/event/{}", "/event/search").permitAll()
                             .requestMatchers("/event/add").hasAnyAuthority("Admin","Manager")
-                            .requestMatchers("/event/**", "/user/**").hasAuthority("Admin")
+                            .requestMatchers("/event/apply", "/user/**").hasAuthority("User")
+                            .requestMatchers("/event/**", "/organisation/**", "/event-type/**").hasAuthority("Admin")
                             .anyRequest().authenticated()
                     )
                 .formLogin((form) -> form

@@ -1,55 +1,83 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Classy Table</title>
 
+    <!-- External Stylesheets -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <link href="../static/styles.css" rel="stylesheet">
+
+    <!-- Internal Styles -->
+    <style>
+        /* Add your custom styles here */
+        body {
+            background-color: #f8f9fa;
+            font-family: Arial, sans-serif;
+        }
+        .table th, .table td {
+            vertical-align: middle;
+        }
+        .table th {
+            background-color: #007bff;
+            color: #fff;
+        }
+        .table-bordered th, .table-bordered td {
+            border: 1px solid #dee2e6;
+        }
+        .table-striped tbody tr:nth-of-type(odd) {
+            background-color: #f2f2f2;
+        }
+        .btn {
+            border-radius: 20px;
+            padding: 8px 20px;
+        }
+        .btn-primary {
+            background-color: #007bff;
+            border-color: #007bff;
+        }
+        .btn-primary:hover {
+            background-color: #0056b3;
+            border-color: #0056b3;
+        }
+    </style>
 </head>
 <body>
-<header th:insert="~{header.html}"></header>
+<header>
+    <!-- Insert your header content here -->
+</header>
 
-<table class="table table-bordered border-warning">
-    <thead>
-    <tr>
-        <th class="p-3 text-primary-emphasis bg-primary-subtle border border-primary-subtle rounded-3" scope="col">
-            id
-        </th>
-        <th class="p-3 text-primary-emphasis bg-primary-subtle border border-primary-subtle rounded-3" scope="col">
-            Organisation
-        </th>
-        <th class="p-3 text-primary-emphasis bg-primary-subtle border border-primary-subtle rounded-3" scope="col">
-            Update
-        </th>
-        <th class="p-3 text-primary-emphasis bg-primary-subtle border border-primary-subtle rounded-3" scope="col">
-            Delete
-        </th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr>
-    <tr th:each="organisation : ${allOrganisation}">
-        <th class="p-3 text-primary-emphasis bg-primary-subtle border border-primary-subtle rounded-3" scope="row"
-            th:text="${organisation.id}"></th>
-        <th class="p-3 text-primary-emphasis bg-primary-subtle border border-primary-subtle rounded-3" scope="row"
-            th:text="${organisation.organisationName}"></th>
-        <td>
-                <a  class="btn btn-primary" sec:authorize="hasAuthority('Admin')" th:href="@{'/organisation/update?id=' + ${organisation.id}}">Update</a>
-        </td>
-        <td>
-                <form action="#" sec:authorize="hasAuthority('Admin')" th:action="@{'/organisation/delete?id=' + ${organisation.id}}" method="post">
-                    <button type="submit">Delete</button>
-                </form>
-        </td>
-    </tr>
-    </tr>
+<div class="container mt-5">
+    <div class="table-responsive">
+        <table class="table table-bordered table-striped">
+            <thead>
+            <tr>
+                <th class="text-center" scope="col">ID</th>
+                <th class="text-center" scope="col">Organisation</th>
+                <th class="text-center" scope="col">Update</th>
+                <th class="text-center" scope="col">Delete</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="organisation : ${allOrganisation}">
+                <td class="text-center" th:text="${organisation.id}"></td>
+                <td th:text="${organisation.organisationName}"></td>
+                <td class="text-center">
+                    <a class="btn btn-primary" th:href="@{'/organisation/update?id=' + ${organisation.id}}" role="button">Update</a>
+                </td>
+                <td class="text-center">
+                    <form th:action="@{'/organisation/delete?id=' + ${organisation.id}}" method="post">
+                        <button type="submit" class="btn btn-danger">Delete</button>
+                    </form>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
 
-    </tbody>
-</table>
-
+<!-- External Scripts -->
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>

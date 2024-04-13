@@ -75,7 +75,8 @@ public class EventService {
         return "event-delete";
     }
 
-    public String searchEvents(String place,
+    public String searchEvents(String name,
+                               String place,
                                Integer type,
                                String date,
                                Double minPrice,
@@ -83,17 +84,17 @@ public class EventService {
                                Model model) {
 
         if (place == null) {
-            place = ""; // Set default value or handle as needed
+            place = "";
         }
         if (date == null) {
             date = "";
         }
 
         if (minPrice == null) {
-            minPrice = (double) 0; // Set default value or handle as needed
+            minPrice = (double) 0;
         }
         if (maxPrice == null) {
-            maxPrice = (double) Integer.MAX_VALUE; // Set default value or handle as needed
+            maxPrice = (double) Integer.MAX_VALUE;
         }
         if (minPrice > maxPrice) {
             double maxPrice1 = maxPrice;
@@ -101,42 +102,11 @@ public class EventService {
             minPrice = maxPrice1;
         }
 
-        model.addAttribute("eventTypes", eventRepository.findByPlaceTypeDateAndPrice(place, type, date, minPrice, maxPrice));
+        model.addAttribute("allEvents", eventRepository.findByPlaceTypeDateAndPrice(name, place, type, date, minPrice, maxPrice));
         model.addAttribute("allTypes", eventTypeRepository.findAll());
         return "all-events";
     }
 
-    public List<Event> searchEventsByPlace(String place) {
-        if (place != null) {
-            return eventRepository.findByPlace(place);
-        } else {
-            return (List<Event>) eventRepository.findAll();
-        }
-    }
-
-    public List<Event> searchEventsByType(String type) {
-        if (type != null) {
-            return eventRepository.findByType(type);
-        } else {
-            return (List<Event>) eventRepository.findAll();
-        }
-    }
-
-    public List<Event> searchEventsByDate(String date) {
-        if (date != null) {
-            return eventRepository.findByDate(date);
-        } else {
-            return (List<Event>) eventRepository.findAll();
-        }
-    }
-
-    public List<Event> searchEventsByPrice(BigDecimal minPrice, BigDecimal maxPrice) {
-        if (minPrice != null || maxPrice != null) {
-            return eventRepository.findByPriceRange(minPrice, maxPrice);
-        } else {
-            return (List<Event>) eventRepository.findAll();
-        }
-    }
 
     public boolean errorEventStatus(EventDTO eventDTO) {
         try {

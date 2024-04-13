@@ -52,6 +52,7 @@
       <div class="ml-auto">
         <a class="nav-link active" sec:authorize="isAuthenticated()" href="/profile">Profile</a>
         <a class="nav-link active" sec:authorize="isAnonymous()" href="/login">Sign In</a>
+        <a class="nav-link active" sec:authorize="isAnonymous()" href="/registration">Sign Up</a>
       </div>
       <form th:action="@{/logout}" method="post" class="ml-3">
         <button class="btn btn-primary" type="submit">Sign Out</button>
