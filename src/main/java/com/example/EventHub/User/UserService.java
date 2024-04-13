@@ -12,8 +12,6 @@ import java.util.Optional;
 
 @Service
 public class UserService {
-    @Autowired
-    UserRepository userRepository;
     public boolean ifTwoPasswordsMatch(String pass1, String pass2){
         return pass1.equals(pass2);
     }
